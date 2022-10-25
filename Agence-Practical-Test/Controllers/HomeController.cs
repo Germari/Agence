@@ -26,5 +26,17 @@ namespace Agence_Practical_Test.Controllers
 
             return View();
         }
+        public ActionResult Con_desempenho()
+        {
+            ViewBag.Message = "Desempenho";
+
+            return View();
+        }
+        public ActionResult Con_desempenho_aba_cliente()
+        {
+            ViewBag.Message = "Desempenho Aba Cliente";
+
+            return View();
+        }
     }
 }

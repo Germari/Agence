@@ -107,82 +107,87 @@
         </table><br>*@
         <div class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
+            
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        
+                        @Html.ActionLink("CAOL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
+                    
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li style="padding-left:10px">
-                                <div style="align-content:center">
-                                    <img id="im0" src="img/menu/agence.gif" border="0">
-                                </div>
-                                <div>
-                                    <a length="59" href="/?Length=4">
-                                        Agence
-                                    </a>
-                                </div>
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im1" src="img/menu/task_icon.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Proyectos</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im2" src="img/menu/administrativo.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Administrativo</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im3" src="img/menu/comercial.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Comercial</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im4" src="img/menu/fichario.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Financiero</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im5" src="img/menu/info_pessoa.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Usuario</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            <li style="padding-left:10px">
-                                <div>
-                                    <img id="im6" src="img/cancel.gif" border="0">
-                                </div>
-                                <div>
-                                    <a href="/?Length=4">Salir</a>
-                                </div>
-                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
-                            </li>
-                            @* <li  style="padding-left:10px">@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
-                        </ul>
+                        
+                            <ul class="nav navbar-nav">
+                                <li style="padding-left:10px">
+                                    <div style="align-content:center">
+                                        <img id="im0" src="~/img/menu/agence.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a length="59" href="/?Length=4">
+                                            Agence
+                                        </a>
+                                    </div>
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im1" src="~/img/menu/task_icon.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="/?Length=4">Proyectos</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im2" src="~/img/menu/administrativo.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="/?Length=4">Administrativo</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im3" src="~/img/menu/comercial.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="Home/Con_desempenho">Comercial</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im4" src="~/img/menu/fichario.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="/?Length=4">Financiero</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im5" src="~/img/icone_inf_pessoal.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="/?Length=4">Usuario</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                <li style="padding-left:10px">
+                                    <div>
+                                        <img id="im6" src="~/img/cancel.gif" border="0">
+                                    </div>
+                                    <div>
+                                        <a href="/?Length=4">Salir</a>
+                                    </div>
+                                    @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                                </li>
+                                @* <li  style="padding-left:10px">@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                            </ul>
+                        
                     </div>
                 </div>
             </div>
