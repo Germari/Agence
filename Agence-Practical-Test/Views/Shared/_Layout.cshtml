@@ -1,43 +1,202 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <meta content="MSHTML 6.00.2800.1106" name=GENERATOR>
+    <title>@ViewBag.Title - CAOL - Controle de Atividades Online - Agence Interativa</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+    @*<table cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <tbody>
+            <tr>
+                <td width="100%" colSpan=3 height=10>
+                    <img src="~/inc/spacer.gif"
+                         width=10>
+                </td>
+            </tr>
+            <tr>
+                <td noWrap width=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+                <td width="100%">
+                    <table cellSpacing=0 cellPadding=0 width="100%" border=0>
+                        <tbody>
+                            <tr>
+                                <td style="BORDER-BOTTOM: #ccc 1px solid">&nbsp;</td>
+                                <td width=98 background="" height=40 rowSpan=2>
+                                    <a href="http://www.agence.com.br/" target=_blank>
+                                        <img alt=""
+                                             src="inc/logo.gif"
+                                             border=0>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; BORDER-LEFT: #ccc 1px dotted; PADDING-TOP: 3px">
+                                    <img height=15 alt=""
+                                         src="inc/fig.gif"
+                                         width=51 border=0>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td noWrap width=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+            </tr>
+            <tr>
+                <td width="100%" colSpan=3 height=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+            </tr>
+            <tr>
+                <td noWrap width=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+                <td width="100%">&nbsp;</td>
+                <td noWrap width=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <tbody>
+            <tr>
+                <td noWrap width=10>
+                    <img src="inc/spacer.gif"
+                         width=10>
+                </td>
+                <td width="100%">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+                    <br>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <br><br><br><br><br>
+        <center>
+            <H1>Protótipo para Avaliação de Candidato.</H1><p>
+                A Avaliação consiste no desenvolvimento da funcionalidade "<a href="con_desempenho.htm">Performance Comercial</a>" (Comercial -> Performance Comercial).
+        </center><br>
+
+        </td>
+        </tr>
+        </table></td>
+        <td noWrap width=10>
+            <img src="inc/spacer.gif"
+                 width=10>
+        </td></tr></tbody>
+
+
+
+
+        </table><br>*@
+        <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li style="padding-left:10px">
+                                <div style="align-content:center">
+                                    <img id="im0" src="img/menu/agence.gif" border="0">
+                                </div>
+                                <div>
+                                    <a length="59" href="/?Length=4">
+                                        Agence
+                                    </a>
+                                </div>
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im1" src="img/menu/task_icon.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Proyectos</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im2" src="img/menu/administrativo.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Administrativo</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im3" src="img/menu/comercial.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Comercial</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im4" src="img/menu/fichario.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Financiero</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im5" src="img/menu/info_pessoa.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Usuario</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            <li style="padding-left:10px">
+                                <div>
+                                    <img id="im6" src="img/cancel.gif" border="0">
+                                </div>
+                                <div>
+                                    <a href="/?Length=4">Salir</a>
+                                </div>
+                                @*@Html.ActionLink("Acerca de", "About", "Home")*@
+                            </li>
+                            @* <li  style="padding-left:10px">@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+                </footer>
+            </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+        @*@RenderBody()*@
 </body>
 </html>
