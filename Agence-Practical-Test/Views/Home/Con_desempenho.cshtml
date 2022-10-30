@@ -1,9 +1,55 @@
-﻿@{
+﻿@using Agence_Practical_Test.Models;
+@model List<CaoUsuario>
+@{
     ViewBag.Title = "CAOL - Controle de Atividades Online - Agence Interativa";
-    
+    int counter = 0;
 }
+@Scripts.Render("~/bundles/jqueryval")
+@section  scripts{
+    <script src="~/Scripts/scripts.js"></script>
+}
+
+<script>
+    function llamarVistaParcial(tbox, monthfrom, yearfrom, monthto, yearto) {
+        var names = [];
+        for (var i = 0; i < tbox.options.length; i++) {
+            names.push(tbox.options[i].text);
+        }
+        var laURLDeLaVista = '@Url.Action("_Con_desempenho", "Home")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        url: laURLDeLaVista,
+        data: { coUsuario: names, initDate: monthfrom.value+'/'+ yearfrom.value, finalDate: monthto.value +'/'+ yearto.value },
+        success: function (response) {
+            $('#resultado').html('');
+            $('#resultado').html(response);
+        }
+    });
+    }
+
+      function llamarVistaParcialGraf(tbox, monthfrom, yearfrom, monthto, yearto) {
+        var names = [];
+        for (var i = 0; i < tbox.options.length; i++) {
+            names.push(tbox.options[i].text);
+        }
+        var laURLDeLaVista = '@Url.Action("_Con_desem_consultor_graf", "Home")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        url: laURLDeLaVista,
+        data: { coUsuario: names, initDate: monthfrom.value+'/'+ yearfrom.value, finalDate: monthto.value +'/'+ yearto.value },
+        success: function (response) {
+            $('#resultado').html('');
+            $('#resultado').html(response);
+        }
+    });
+}
+</script>
 <div>
-    <table  class="mytable">
+    <table class="mytable">
         <tbody>
             <tr>
                 <td width="100%" colspan="3" height="10">
@@ -63,7 +109,7 @@
             </tr>
         </tbody>
     </table>
-    <table class="mytable" style="border:0; width:100% ;cellspacing:0; cellpadding:0 " >
+    <table class="mytable" style="border:0; width:100% ;cellspacing:0; cellpadding:0 ">
         <tbody>
             <tr>
                 <td noWrap width=10>
@@ -78,39 +124,39 @@
                                     <tr>
                                         <!--
 
-                                    Para as abas ficarem com o visual apresentado na p&aacute;gina, &eacute; necess&aacute;rio colocar os inputs
-                                    dentro de uma tabela. Essa tabela faz o papel de grade e gera algumas linhas pra completar
-                                    o layout.
-
-                                    Importante:
-                                    Note the a c&eacute;lula onde consta o botao principal (selecionado) n&atilde;o leva a classe CEL_TAB.
-
-                                    Recomendo criar uma funcao/classe para gerar essas Abas com esse layout.
-
-                                    -->
-                                        @* <!--
-
-                                        Para que las pestañas tengan el aspecto que se muestra en la página, &eacute; necesario poner las entradas
-                                        dentro de una table. Esta tabla actúa como una cuadrícula y genera algunas líneas para completar
-                                        el diseño
+                                        Para as abas ficarem com o visual apresentado na p&aacute;gina, &eacute; necess&aacute;rio colocar os inputs
+                                        dentro de uma tabela. Essa tabela faz o papel de grade e gera algumas linhas pra completar
+                                        o layout.
 
                                         Importante:
-                                        Tenga en cuenta que la celda donde aparece el botón principal (seleccionado) no toma la clase CEL_TAB.
+                                        Note the a c&eacute;lula onde consta o botao principal (selecionado) n&atilde;o leva a classe CEL_TAB.
 
-                                        Recomiendo crear una función/clase para generar estas pestañas con este diseño.
+                                        Recomendo criar uma funcao/classe para gerar essas Abas com esse layout.
 
-                                        --> *@
+                                        -->
+                                        @* <!--
+
+                                            Para que las pestañas tengan el aspecto que se muestra en la página, &eacute; necesario poner las entradas
+                                            dentro de una table. Esta tabla actúa como una cuadrícula y genera algunas líneas para completar
+                                            el diseño
+
+                                            Importante:
+                                            Tenga en cuenta que la celda donde aparece el botón principal (seleccionado) no toma la clase CEL_TAB.
+
+                                            Recomiendo crear una función/clase para generar estas pestañas con este diseño.
+
+                                            --> *@
                                         <td nowrap valign="bottom" align="center" class="cel_tab" height="35">
                                             <input type="submit" @*value*@ name="nothing2" class="nothing">
                                             &nbsp;&nbsp;
                                         </td>
 
                                         <form action="@Url.Action("con_desempenho", "Home")">
-                                            <td nowrap valign="bottom" align="center">
-                                              <span class="cel_tab">
+                                        <td nowrap valign="bottom" align="center">
+                                            <span class="cel_tab">
                                                 <input type="submit" value="Por Consultor" name="act22223" class="tab_current">
-                                              </span>
-                                            </td>
+                                            </span>
+                                        </td>
                                         </form>
                                         <td nowrap valign="bottom" align="center" class="cel_tab">&nbsp;&nbsp;</td>
                                         <form action="@Url.Action("con_desempenho_aba_cliente", "Home")">
@@ -137,7 +183,7 @@
                                             <td width="10%" nowrap="nowrap" bgcolor="#efefef"><div align="right"><strong>Per&iacute;odo</strong></div></td>
                                             <td>
                                                 <font color="black">
-                                                    <select name="select5">
+                                                    <select name="select5" id="select5">
                                                         <option>Jan
                                                         <option>Fev
                                                         <option>Mar
@@ -151,7 +197,7 @@
                                                         <option>Nov
                                                         <option>Dez
                                                     </select>
-                                                    <select name="select">
+                                                    <select name="select" id="select1">
                                                         <option>2003
                                                         <option>2004
                                                         <option>2005</option>
@@ -159,7 +205,7 @@
                                                         <option selected>2007</option>
                                                     </select>
                                                     a
-                                                    <select name="select3">
+                                                    <select name="select3" id="select3">
                                                         <option>Jan
                                                         <option>Fev
                                                         <option>Mar
@@ -173,7 +219,7 @@
                                                         <option>Nov
                                                         <option>Dez
                                                     </select>
-                                                    <select name="select4">
+                                                    <select name="select4" id="select4">
                                                         <option>2003
                                                         <option>2004
                                                         <option>2005</option>
@@ -185,14 +231,14 @@
                                             <td width="20%" rowspan="2">
                                                 <div align="center">
                                                     <font color="black">
-                                                        <form action="con_desem_consultor_rel.htm">
-                                                            <input class="relatorio-button" style=" BACKGROUND-IMAGE: url(img/icone_relatorio.png);" type="submit" value="Relat&oacute;rio" name="btSalvar22" />
-                                                        </form>
-                                                        <form action="con_desem_consultor_graf.htm">
-                                                            <input class="grafico-button" style="BACKGROUND-IMAGE: url(img/icone_grafico.png)" type="submit" value="Gr&aacute;fico" name="btSalvar222" />
-                                                        </form>
+
+                                                        <input class="relatorio-button" style="BACKGROUND-IMAGE: url(../../img/icone_relatorio.png); " type="submit" value="Relat&oacute;rio" name="btSalvar22" onclick="llamarVistaParcial(list2, select5, select1, select4,select3);" />
+                                                       
+                                                        
+                                                            <input class="grafico-button" style="BACKGROUND-IMAGE: url(../../img/icone_grafico.png) " type="submit" value="Gr&aacute;fico" name="btSalvar222" onclick="llamarVistaParcialGraf(list2, select5, select1, select4, select3);" />
+                                                       
                                                         <form action="con_desem_consultor_pizza.htm">
-                                                            <input class="pizza-button" style="BACKGROUND-IMAGE: url(img/icone_pizza.png)" type="submit" value="Pizza" name="btSalvar222" />
+                                                            <input class="pizza-button" style="BACKGROUND-IMAGE: url(../../img/icone_pizza.png) " type="submit" value="Pizza" name="btSalvar222" />
                                                         </form>
                                                     </font>
                                                 </div>
@@ -205,20 +251,15 @@
                                                     <tr>
                                                         <td>
                                                             <select multiple size="8" name="list1" id="list1" style="width:280px">
+                                                                @foreach (var item in Model)
+                                                                {
+                                                                    <option value="aline.chastel">@item.NoUsuario</option>
 
-                                                                <option value="aline.chastel">Aline Chastel Lima</option>
-                                                                <option value="anapaula.chiodaro">Ana Paula Fontes Martins Chiodaro</option>
-                                                                <option value="bruno.freitas">Bruno Sousa Freitas</option>
-                                                                <option value="contato">Carlos Cezar Girão de Arruda</option>
-                                                                <option value="carlos.arruda">Carlos Flávio Girão de Arruda</option>
-                                                                <option value="carlos.carvalho">Carlos Henrique de Carvalho Filho</option>
-                                                                <option value="felipe.chahad">Felipe Chahad</option>
-                                                                <option value="renato.pereira">Renato Marcus Pereira</option>
-                                                                <option value="silvio.maraes">Silvio Marães Ferreira</option>
+                                                                }
                                                             </select>
                                                         </td>
                                                         <td align="center" valign="middle">
-                                                            <input name="button" type="button" onClick="move(list1,list2)" value=">>">
+                                                            <input name="button" type="button" onClick="move(list1, list2)" value=">>">
                                                             <br>
                                                             <input name="button" type="button" onClick="move(list2,list1)" value="<<">
                                                         </td>
@@ -240,13 +281,23 @@
                                     <br>
                                     </form>
                                 </p>
+
+                                <div id="resultado"></div>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;</p>
+
                                 <p>&nbsp;    </p>
                             </td>
                         </tr>
@@ -258,5 +309,9 @@
                 </td>
             </tr>
         </tbody>
-    </table><br>
+
+
+
+    </table>
+    <br>
 </div>

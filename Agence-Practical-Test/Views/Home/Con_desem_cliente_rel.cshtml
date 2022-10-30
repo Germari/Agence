@@ -1,0 +1,45 @@
+﻿<table cellspacing="1" cellpadding="3" width="100%" bgcolor="#cccccc" id="pesquisaAvancada">
+    <tbody>
+
+        <tr bgcolor="#fafafa">
+            <td nowrap="" bgcolor="#efefef"><div align="center" class="style3"><strong>Período</strong></div></td>
+            @foreach (var item in ViewBag.Elements)
+            {
+            <td bgcolor="#efefef"><div align="center" class="style3"><strong>@item</strong></div></td>
+
+            }
+            @*<td bgcolor="#efefef"><div align="center" class="style3"><strong>Traffic</strong></div></td>
+            <td bgcolor="#efefef"><div align="center" class="style3"><strong>Unicoba</strong></div></td>
+            <td bgcolor="#efefef"><div align="center" class="style3"><strong>Webmotors</strong></div></td>
+            <td bgcolor="#efefef"><div align="center" class="style3"><strong>TIM</strong></div></td>*@
+            <td bgcolor="#efefef"><div align="center" class="style3"><strong>TOTAL</strong></div></td>
+        </tr>
+        <tr bgcolor="#fafafa">
+            <td nowrap="">Janeiro de 2007</td>
+            <td><div align="right">R$ 1.500,00</div></td>
+            <td><div align="right">R$ 1.500,00</div></td>
+            <td bgcolor="#fafafa"><div align="right" class="style2"> R$ 11.350,00</div></td>
+            <td><div align="right">R$ 1.500,00</div></td>
+            <td><div align="right"> R$ 1.350,00</div></td>
+            <td><div align="right"> R$ 17.200,00</div></td>
+        </tr>
+        <tr bgcolor="#fafafa">
+            <td nowrap="">Fevereiro de 2007 </td>
+            <td><div align="right">R$ 25.000,00</div></td>
+            <td><div align="right">R$ 2.500,00</div></td>
+            <td><div align="right">R$ 24.750,00</div></td>
+            <td><div align="right" class="style2">R$ 27.100,00</div></td>
+            <td><div align="right">R$ 24.750,00</div></td>
+            <td><div align="right">R$ 104.100,00</div></td>
+        </tr>
+        <tr bgcolor="#efefef">
+            <td nowrap="" bgcolor="#efefef"><strong>TOTAL</strong></td>
+            <td bgcolor="#efefef"><div align="right"><font color="#000000">R$ 26.500,00</font></div></td>
+            <td><div align="right"><font color="#000000">R$ 4.000,00</font></div></td>
+            <td><div align="right" class="style2"><strong>R$ 36.100,00</strong></div></td>
+            <td><div align="right"><font color="#000000">R$ 28.600,00</font></div></td>
+            <td><div align="right" class="style3">R$ 26.100,00</div></td>
+            <td><div align="right" class="style3"><strong>R$ 121.300,00</strong></div></td>
+        </tr>
+    </tbody>
+</table>

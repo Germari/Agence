@@ -1,7 +1,14 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<p>Use this area to provide additional information.</p>
+﻿@*@{
+        var myChart = new Chart(width: 600, height: 400)
+            .AddTitle("Chart Title")
+            .AddSeries(
+                name: "Employee",
+                xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+                yValues: new[] { "2", "6", "4", "5", "3" })
+            .Write();
+    }*@
+@{
+    var x = new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" };
+    var y= new[] { "2", "6", "4", "5", "3" };
+    var myCharty = new Chart(width: 600, height: 400,theme: "<Chart BackColor=\"#756a6a\" BackGradientStyle=\"TopBottom\" BorderColor=\"64, 64, 64\" BorderWidth=\"2\" BorderlineDashStyle=\"Solid\" Palette=\"BrightPastel\" AntiAliasing=\"All\">\r\n    <ChartAreas>\r\n        <ChartArea Name=\"Default\" _Template_=\"All\" BackColor=\"Transparent\" BackSecondaryColor=\"White\" BorderColor=\"64, 64, 64, 64\" BorderDashStyle=\"Solid\" ShadowColor=\"Transparent\">\r\n            <Area3DStyle LightStyle=\"Simplistic\" Enable3D=\"True\" Inclination=\"5\" IsClustered=\"True\" IsRightAngleAxes=\"False\" Perspective=\"0\" Rotation=\"15\" WallWidth=\"1\" />\r\n        </ChartArea>\r\n    </ChartAreas>\r\n    <Legends>\r\n        <Legend _Template_=\"All\" BackColor=\"Transparent\" Font=\"Trebuchet MS, 8.25pt, style=Bold\" IsTextAutoFit=\"True\" /> \r\n    </Legends>\r\n    </Chart>").AddTitle("title").AddSeries(name: "Empleado", xValue:x,yValues: y).AddSeries(name: "Emepleado", xValue: x, yValues: y).Write();
+    }

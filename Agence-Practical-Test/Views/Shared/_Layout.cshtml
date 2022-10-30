@@ -126,7 +126,7 @@
                                         <img id="im0" src="~/img/menu/agence.gif" border="0">
                                     </div>
                                     <div>
-                                        <a length="59" href="/?Length=4">
+                                        <a length="59" href="?Length=4">
                                             Agence
                                         </a>
                                     </div>
@@ -136,7 +136,7 @@
                                         <img id="im1" src="~/img/menu/task_icon.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="/?Length=4">Proyectos</a>
+                                        <a href="?Length=4">Proyectos</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -145,7 +145,7 @@
                                         <img id="im2" src="~/img/menu/administrativo.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="/?Length=4">Administrativo</a>
+                                        <a href="?Length=4">Administrativo</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -154,7 +154,7 @@
                                         <img id="im3" src="~/img/menu/comercial.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="Home/Con_desempenho">Comercial</a>
+                                        <a href="/Home/Con_desempenho">Comercial</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -163,7 +163,7 @@
                                         <img id="im4" src="~/img/menu/fichario.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="/?Length=4">Financiero</a>
+                                        <a href="?Length=4">Financiero</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -172,7 +172,7 @@
                                         <img id="im5" src="~/img/icone_inf_pessoal.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="/?Length=4">Usuario</a>
+                                        <a href="?Length=4">Usuario</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -181,7 +181,7 @@
                                         <img id="im6" src="~/img/cancel.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="/?Length=4">Salir</a>
+                                        <a href="?Length=4">Salir</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -201,6 +201,7 @@
 
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")
+    
             @RenderSection("scripts", required: false)
         @*@RenderBody()*@
 </body>

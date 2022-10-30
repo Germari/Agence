@@ -16,6 +16,19 @@ INPUT {
     FONT-FAMILY: Tahoma,Verdana,Trebuchet MS,Helvetica,Arial;
 }
 
+/*.tab_current {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-left: 1 solid #000000;
+    border-right: 1 solid #000000;
+    border-top: 1 solid #000000;
+    border-bottom: 1 solid white;
+    background-color: white;
+    color: #888;
+    font-weight: bold;
+    height: 25;
+}*/
 .tab_current {
     background-color: white;
     color: black;
@@ -24,6 +37,7 @@ INPUT {
     border-right: 1 solid #000000;
     border-top: 1 solid #000000;
     border-bottom: 1 solid white;
+    height: 25px;
 }
 
 .relatorio-button {
