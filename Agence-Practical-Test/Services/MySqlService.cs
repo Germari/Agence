@@ -68,17 +68,17 @@ namespace Agence_Practical_Test.Services
             }
             return response;
         }
-        public ConDesemConsultorRel GetConDesemConsultorRel(string noUsuario)
+        public ConDesemConsultorRel GetConDesemConsultorRel(string noUsuario, DateTime initialD, DateTime finalD)
         {
             var consultor = GetConsultorByNo(noUsuario);
-            var coUsuario = consultor.CoUsuario;
             if (consultor == default)
                 return default;
+            var coUsuario = consultor.CoUsuario;
 
             var response = new ConDesemConsultorRel()
             {
                 Name = consultor.NoUsuario,
-                Values = GetConDesemConsultorRelValues(coUsuario),
+                Values = GetConDesemConsultorRelValues(coUsuario,initialD,finalD),
                 Saldo = new ConDesemConsultorRelSaldo()
                 
             };
@@ -118,10 +118,10 @@ namespace Agence_Practical_Test.Services
             return response;
         }
 
-        private List<ConDesemConsultorValue> GetConDesemConsultorRelValues(string coUsuario)
+        private List<ConDesemConsultorValue> GetConDesemConsultorRelValues(string coUsuario, DateTime initialD, DateTime finalD)
         {
             List<ConDesemConsultorValue> response = new List<ConDesemConsultorValue>();
-            List<CaoFatura> values = GetFacturesByCoUsuario(coUsuario);
+            List<CaoFatura> values = GetFacturesByCoUsuario(coUsuario,initialD,finalD);
             if (values == default)
                 return response;
 
@@ -186,7 +186,7 @@ namespace Agence_Practical_Test.Services
             return response;
         }
 
-        private List<CaoFatura> GetFacturesByCoUsuario(string coUsuario)
+        private List<CaoFatura> GetFacturesByCoUsuario(string coUsuario, DateTime initialD, DateTime finalD)
         {
             List<CaoFatura> response = new List<CaoFatura>();
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -196,8 +196,10 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_fatura cf inner join caol.cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario group by cf.data_emissao ";
+                    cmd.CommandText = @"select * from caol.cao_fatura cf inner join caol.cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario and (cf.data_emissao >= ?initD and cf.data_emissao <= ?finalD )group by cf.data_emissao ";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
+                    cmd.Parameters.Add("?initD", MySqlDbType.DateTime).Value = initialD;
+                    cmd.Parameters.Add("?finalD", MySqlDbType.DateTime).Value = finalD;
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
