@@ -37,6 +37,30 @@ namespace Agence_Practical_Test.Controllers
             }
             return PartialView(result);
         }
+        public ActionResult Pizza_Graf(string coUsuario, string initDate, string finalDate)
+        {
+            List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
+
+            if (coUsuario==null)
+            return PartialView(result);
+        var coUsuarioList = JsonConvert.DeserializeObject<List<string>>(coUsuario);
+
+            DateTime initialD = DateTime.MinValue;
+            DateTime finalD = DateTime.MaxValue;
+            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out initialD);
+            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out finalD);
+            finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
+
+            if (coUsuarioList == default)
+                return PartialView(result);
+            MySqlService service = new MySqlService();
+
+            foreach (var item in coUsuarioList)
+            {
+                result.Add(service.GetConDesemConsultorRel(item, initialD, finalD));
+            }
+            return PartialView(result);
+        }
 
         public ActionResult Contact()
         {
@@ -110,6 +134,15 @@ namespace Agence_Practical_Test.Controllers
             // {
             //     result.Add(service.GetConDesemConsultorRel(item));
             // }
+            ViewBag.CoUsuario = coUsuario;
+            ViewBag.InitDate = initDate;
+            ViewBag.FinalDate = finalDate;
+
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult _Con_desem_consultor_pizza(List<string> coUsuario, string initDate, string finalDate)
+        {
             ViewBag.CoUsuario = coUsuario;
             ViewBag.InitDate = initDate;
             ViewBag.FinalDate = finalDate;

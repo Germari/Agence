@@ -46,6 +46,25 @@
             $('#resultado').html(response);
         }
     });
+    }
+
+      function llamarVistaParcialGrafPizza(tbox, monthfrom, yearfrom, monthto, yearto) {
+        var names = [];
+        for (var i = 0; i < tbox.options.length; i++) {
+            names.push(tbox.options[i].text);
+        }
+        var laURLDeLaVista = '@Url.Action("_Con_desem_consultor_pizza", "Home")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        url: laURLDeLaVista,
+        data: { coUsuario: names, initDate: monthfrom.value+'/'+ yearfrom.value, finalDate: monthto.value +'/'+ yearto.value },
+        success: function (response) {
+            $('#resultado').html('');
+            $('#resultado').html(response);
+        }
+    });
 }
 </script>
 <div>
@@ -236,13 +255,14 @@
 
                                                         </div>
                                                         <div>
-                                                        <input class="grafico-button" style="BACKGROUND-IMAGE: url(../../img/icone_grafico.png) " type="submit" value="Gr&aacute;fico" name="btSalvar222" onclick="llamarVistaParcialGraf(list2, select5, select1, select4, select3);" />
+                                                            <input class="grafico-button" style="BACKGROUND-IMAGE: url(../../img/icone_grafico.png) " type="submit" value="Gr&aacute;fico" name="btSalvar222" onclick="llamarVistaParcialGraf(list2, select5, select1, select4, select3);" />
+                                                        </div>
+                                                        <div>
+                                                            <input class="pizza-button" style="BACKGROUND-IMAGE: url(../../img/icone_pizza.png) " type="submit" value="Pizza" name="btSalvar222" onclick="llamarVistaParcialGrafPizza(list2, select5, select1, select4, select3);"/>
+
+                                                        </div>
+                                                    </font>
                                                 </div>
-                                                <form action="con_desem_consultor_pizza.htm">
-                                                    <input class="pizza-button" style="BACKGROUND-IMAGE: url(../../img/icone_pizza.png) " type="submit" value="Pizza" name="btSalvar222" />
-                                                </form>
-                                                </font>
-</div>
                                             </td>
                                         </tr>
                                         <tr bgcolor="#fafafa">

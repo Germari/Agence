@@ -510,6 +510,8 @@
     <Content Include="Views\Home\Detalles.cshtml" />
     <Content Include="Views\Home\_Con_desempenho_aba_client.cshtml" />
     <Content Include="Views\Home\Con_desem_cliente_rel.cshtml" />
+    <Content Include="Views\Home\_Con_desem_consultor_pizza.cshtml" />
+    <Content Include="Views\Home\Pizza_Graf.cshtml" />
     <Content Include="Views\Home\_Con_desem_consultor_graf.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -17,9 +17,9 @@ namespace Agence_Practical_Test.Services
             //MySqlConnection conexion = new MySqlConnection(connectionString);
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
-                conexion.Open();
                 try
                 {
+                conexion.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
                     cmd.CommandText = @"select * from caol.cao_usuario cu inner join caol.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2)";

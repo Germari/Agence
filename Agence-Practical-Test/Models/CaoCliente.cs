@@ -34,5 +34,6 @@ namespace Agence_Practical_Test.Models
         public string NuFax { get; set; }
         public string Ddd2 { get; set; }
         public string Telefone2 { get; set; }
+
     }
 }
