@@ -68,7 +68,7 @@
 }
 </script>
 <div>
-    <table class="mytable">
+    <table class="mytable table-responsive">
         <tbody>
             <tr>
                 <td width="100%" colspan="3" height="10">
@@ -128,7 +128,7 @@
             </tr>
         </tbody>
     </table>
-    <table class="mytable" style="border:0; width:100% ;cellspacing:0; cellpadding:0 ">
+    <table class="mytable table-responsive">
         <tbody>
             <tr>
                 <td noWrap width=10>
@@ -141,32 +141,8 @@
                             <td class="index" style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px" valign=top>
                                 <table class="mytable" style="cellSpacing =0; cellPadding=0;">
                                     <tr>
-                                        <!--
-
-                                        Para as abas ficarem com o visual apresentado na p&aacute;gina, &eacute; necess&aacute;rio colocar os inputs
-                                        dentro de uma tabela. Essa tabela faz o papel de grade e gera algumas linhas pra completar
-                                        o layout.
-
-                                        Importante:
-                                        Note the a c&eacute;lula onde consta o botao principal (selecionado) n&atilde;o leva a classe CEL_TAB.
-
-                                        Recomendo criar uma funcao/classe para gerar essas Abas com esse layout.
-
-                                        -->
-                                        @* <!--
-
-                                            Para que las pestañas tengan el aspecto que se muestra en la página, &eacute; necesario poner las entradas
-                                            dentro de una table. Esta tabla actúa como una cuadrícula y genera algunas líneas para completar
-                                            el diseño
-
-                                            Importante:
-                                            Tenga en cuenta que la celda donde aparece el botón principal (seleccionado) no toma la clase CEL_TAB.
-
-                                            Recomiendo crear una función/clase para generar estas pestañas con este diseño.
-
-                                            --> *@
                                         <td nowrap valign="bottom" align="center" class="cel_tab" height="35">
-                                            <input type="submit" @*value*@ name="nothing2" class="nothing">
+                                            <input type="submit" hidden value="" name="nothing2" class="nothing">
                                             &nbsp;&nbsp;
                                         </td>
 
@@ -195,8 +171,7 @@
                                     </tr>
                                 </table>
                                 <br>
-                                <table width="100%" cellpadding="3" cellspacing="1"
-                                       bgcolor="#cccccc" id="pesquisaAvancada">
+                                <table class="table table-responsive" id="pesquisaAvancada">
                                     <tbody>
                                         <tr bgcolor="#fafafa">
                                             <td width="10%" nowrap="nowrap" bgcolor="#efefef"><div align="right"><strong>Per&iacute;odo</strong></div></td>
@@ -247,23 +222,7 @@
                                                     </select>
                                                 </font>
                                             </td>
-                                            <td width="20%" rowspan="2">
-                                                <div align="center">
-                                                    <font color="black">
-                                                        <div>
-                                                            <input class="relatorio-button" style="BACKGROUND-IMAGE: url(../../img/icone_relatorio.png); " type="submit" value="Relat&oacute;rio" name="btSalvar22" onclick="llamarVistaParcial(list2, select5, select1, select4,select3);" />
-
-                                                        </div>
-                                                        <div>
-                                                            <input class="grafico-button" style="BACKGROUND-IMAGE: url(../../img/icone_grafico.png) " type="submit" value="Gr&aacute;fico" name="btSalvar222" onclick="llamarVistaParcialGraf(list2, select5, select1, select4, select3);" />
-                                                        </div>
-                                                        <div>
-                                                            <input class="pizza-button" style="BACKGROUND-IMAGE: url(../../img/icone_pizza.png) " type="submit" value="Pizza" name="btSalvar222" onclick="llamarVistaParcialGrafPizza(list2, select5, select1, select4, select3);"/>
-
-                                                        </div>
-                                                    </font>
-                                                </div>
-                                            </td>
+                                         
                                         </tr>
                                         <tr bgcolor="#fafafa">
                                             <td nowrap="nowrap" bgcolor="#efefef"><div align="right"><strong>Consultores</strong></div></td>
@@ -271,7 +230,7 @@
                                                 <table align="center">
                                                     <tr>
                                                         <td>
-                                                            <select multiple size="8" name="list1" id="list1" style="width:280px">
+                                                            <select multiple size="8" name="list1" id="list1" class="my-select" style="min-width:100px">
                                                                 @foreach (var item in Model)
                                                                 {
                                                                     <option value="aline.chastel">@item.NoUsuario</option>
@@ -285,12 +244,29 @@
                                                             <input name="button" type="button" onClick="move(list2,list1)" value="<<">
                                                         </td>
                                                         <td>
-                                                            <select multiple size="8" name="list2" id="list2" style="width:280px">
+                                                            <select class="my-select" multiple size="8" name="list2" id="list2" >
                                                             </select>
                                                             <input type="hidden" name="lista_analista" value="">
                                                         </td>
                                                     </tr>
                                                 </table>
+                                            </td>
+                                            <td width="20%" rowspan="2">
+                                                <div align="center">
+                                                    <font color="black">
+                                                        <div>
+                                                            <input class="relatorio-button" style="BACKGROUND-IMAGE: url(../../img/icone_relatorio.png); " type="submit" value="Relat&oacute;rio" name="btSalvar22" onclick="llamarVistaParcial(list2, select5, select1, select4,select3);" />
+
+                                                        </div>
+                                                        <div>
+                                                            <input class="grafico-button" style="BACKGROUND-IMAGE: url(../../img/icone_grafico.png) " type="submit" value="Gr&aacute;fico" name="btSalvar222" onclick="llamarVistaParcialGraf(list2, select5, select1, select4, select3);" />
+                                                        </div>
+                                                        <div>
+                                                            <input class="pizza-button" style="BACKGROUND-IMAGE: url(../../img/icone_pizza.png) " type="submit" value="Pizza" name="btSalvar222" onclick="llamarVistaParcialGrafPizza(list2, select5, select1, select4, select3);" />
+
+                                                        </div>
+                                                    </font>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

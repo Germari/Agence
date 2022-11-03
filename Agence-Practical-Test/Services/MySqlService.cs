@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Agence_Practical_Test.Services
@@ -11,7 +12,7 @@ namespace Agence_Practical_Test.Services
     public class MySqlService:IMySqlService
     {
             const string connectionString = "Server=localhost;Port=3306;Database=caol;Uid=root;";
-        public List<CaoUsuario> GetConsultores()
+        public async Task<List<CaoUsuario>> GetConsultores()
         {
             List<CaoUsuario> response = new List<CaoUsuario>();
             //MySqlConnection conexion = new MySqlConnection(connectionString);
@@ -40,7 +41,7 @@ namespace Agence_Practical_Test.Services
             }
             return response;
         }
-        public CaoUsuario GetConsultor(string coUsuario)
+        public async Task<CaoUsuario> GetConsultor(string coUsuario)
         {
             CaoUsuario response= default;
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -68,7 +69,7 @@ namespace Agence_Practical_Test.Services
             }
             return response;
         }
-        public ConDesemConsultorRel GetConDesemConsultorRel(string noUsuario, DateTime initialD, DateTime finalD)
+        public async Task<ConDesemConsultorRel> GetConDesemConsultorRel(string noUsuario, DateTime initialD, DateTime finalD)
         {
             var consultor = GetConsultorByNo(noUsuario);
             if (consultor == default)
@@ -86,6 +87,36 @@ namespace Agence_Practical_Test.Services
             response.Saldo.CustoFixo = response.Values.Sum(x => x.CustoFixo);
             response.Saldo.Lucro = response.Values.Sum(x => x.Lucro);
             response.Saldo.ReceitaLiquida = response.Values.Sum(x => x.ReceitaLiquida);
+            return response;
+        }
+
+        public async Task<List<CaoCliente>> GetClientes()
+        {
+            List<CaoCliente> response = new List<CaoCliente>();
+            //MySqlConnection conexion = new MySqlConnection(connectionString);
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conexion;
+                    cmd.CommandText = @"select * from caol.cao_cliente";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            response.Add(CaoCliente.FromReader(reader));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                conexion.Dispose();
+            }
             return response;
         }
 

@@ -13,6 +13,11 @@ namespace Agence_Practical_Test.Controllers
 {
     public class HomeController : Controller
     {
+        private  IMySqlService _service;
+        public HomeController()
+        {
+            _service = new MySqlService();
+        }
         public ActionResult Index()
         {
             return View();
@@ -29,18 +34,17 @@ namespace Agence_Practical_Test.Controllers
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
             if (coUsuarioList == default)
                 return PartialView(result);
-            MySqlService service = new MySqlService();
+            
 
             foreach (var item in coUsuarioList)
             {
-                result.Add(service.GetConDesemConsultorRel(item,initialD,finalD));
+                result.Add(_service.GetConDesemConsultorRel(item,initialD,finalD).Result);
             }
             return PartialView(result);
         }
         public ActionResult Pizza_Graf(string coUsuario, string initDate, string finalDate)
         {
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
-
             if (coUsuario==null)
             return PartialView(result);
         var coUsuarioList = JsonConvert.DeserializeObject<List<string>>(coUsuario);
@@ -53,43 +57,35 @@ namespace Agence_Practical_Test.Controllers
 
             if (coUsuarioList == default)
                 return PartialView(result);
-            MySqlService service = new MySqlService();
 
             foreach (var item in coUsuarioList)
             {
-                result.Add(service.GetConDesemConsultorRel(item, initialD, finalD));
+                result.Add(_service.GetConDesemConsultorRel(item, initialD, finalD).Result);
             }
             return PartialView(result);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
         public ActionResult Con_desempenho()
         {
-            MySqlService service = new MySqlService();
 
-            var consultores=service.GetConsultores();
+            var consultores= _service.GetConsultores().Result;
             ViewBag.Message = "Desempenho";
             return View(consultores);
         }
         public ActionResult Con_desempenho_aba_cliente()
         {
-            ViewBag.Message = "Desempenho Aba Cliente";
 
-            return View();
+            var clientes = _service.GetClientes().Result;
+            ViewBag.Message = "Desempenho";
+            return View(clientes);
         }
-        [HttpPost]
-        public ActionResult _Con_desempenho_aba_client(List<string> count)
+
+        public ActionResult _Con_desempenho_aba_client()
         {
-            ViewBag.Message = "Desempenho Aba Cliente";
-            ViewBag.Elements = count;
+            
             return PartialView();
         }
-
+      
         /// <summary>
         /// 
         /// </summary>
@@ -100,40 +96,25 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario,string initDate, string finalDate)
         {
-            DateTime initialD = DateTime.MinValue;
-            DateTime finalD = DateTime.MaxValue;
-           var parsed= DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"),System.Globalization.DateTimeStyles.None, out initialD);
-           parsed= DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None,out finalD);
-            finalD=finalD.AddDays(DateTime.DaysInMonth(finalD.Year,finalD.Month) - 1);
+                DateTime initialD = DateTime.MinValue;
+                DateTime finalD = DateTime.MaxValue;
+               var parsed= DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"),System.Globalization.DateTimeStyles.None, out initialD);
+               parsed= DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None,out finalD);
+                finalD=finalD.AddDays(DateTime.DaysInMonth(finalD.Year,finalD.Month) - 1);
 
-            List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
-            if(coUsuario== default)
+                List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
+                if(coUsuario== default)
+                    return PartialView(result);
+
+                foreach (var item in coUsuario)
+                {
+                    result.Add(_service.GetConDesemConsultorRel(item,initialD,finalD).Result);
+                }
                 return PartialView(result);
-            MySqlService service = new MySqlService();
-
-            foreach (var item in coUsuario)
-            {
-                result.Add(service.GetConDesemConsultorRel(item,initialD,finalD));
-            }
-            return PartialView(result);
         }
         [HttpPost]
         public ActionResult _Con_desem_consultor_graf(List<string> coUsuario,string initDate, string finalDate)
         {
-            // DateTime initialD = DateTime.MinValue;
-            // DateTime finalD = DateTime.MaxValue;
-            //var parsed= DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"),System.Globalization.DateTimeStyles.None, out initialD);
-            //parsed= DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None,out finalD);
-
-            // List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
-            // if(coUsuario== default)
-            //     return PartialView(result);
-            // MySqlService service = new MySqlService();
-
-            // foreach (var item in coUsuario)
-            // {
-            //     result.Add(service.GetConDesemConsultorRel(item));
-            // }
             ViewBag.CoUsuario = coUsuario;
             ViewBag.InitDate = initDate;
             ViewBag.FinalDate = finalDate;

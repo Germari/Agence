@@ -181,7 +181,7 @@
                                         <img id="im6" src="~/img/cancel.gif" border="0">
                                     </div>
                                     <div>
-                                        <a href="?Length=4">Salir</a>
+                                        <a href="/Home/Index">Salir</a>
                                     </div>
                                     @*@Html.ActionLink("Acerca de", "About", "Home")*@
                                 </li>
@@ -194,9 +194,6 @@
             <div class="container body-content">
                 @RenderBody()
                 <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-                </footer>
             </div>
 
             @Scripts.Render("~/bundles/jquery")

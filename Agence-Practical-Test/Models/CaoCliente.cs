@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -35,5 +36,12 @@ namespace Agence_Practical_Test.Models
         public string Ddd2 { get; set; }
         public string Telefone2 { get; set; }
 
+        public static CaoCliente FromReader(MySqlDataReader reader)
+        {
+            return new CaoCliente()
+            {
+                NoContato = reader["no_contato"].ToString()
+            };
+        }
     }
 }

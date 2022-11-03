@@ -100,3 +100,17 @@ INPUT {
     border-top: 1 solid #000000;
     border-bottom: 1 solid #808000;
 }
+
+.my-select {
+    max-width: 280px;
+    width: 100%;
+    font-size: 21px;
+    min-width: 100px
+}
+@media (min-width: 768px) {
+    .my-select {
+        width: 280px;
+        min-width: 280px;
+       
+    }
+}
