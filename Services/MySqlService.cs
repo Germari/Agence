@@ -14,13 +14,19 @@ namespace Agence_Practical_Test.Services
         private readonly string connectionString;
         public MySqlService(IConfiguration config)
         {
-            connectionString = config.GetValue<string>("ConnectionStrings:DefaultConnection");
+            MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
+            conn_string.Server = "btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com";
+            conn_string.Database = "btysdysnqpqagrxxw0d2";
+            conn_string.UserID = "uwdx5b9h4efazhm1";
+            conn_string.Password = "kyq7GytPr1yRDt06Gmh7";
+            conn_string.Port = 3306;
+            connectionString = conn_string.ToString();// "Server=btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com;Port=3306;Database=btysdysnqpqagrxxw0d2;Uid=uwdx5b9h4efazhm1;Pwd=kyq7GytPr1yRDt06Gmh7;SslMode=Preferred;";//config.GetValue<string>("ConnectionStrings:DefaultConnection");
         }
         public async Task<List<CaoUsuario>> GetConsultores()
         {
             List<CaoUsuario> response = new List<CaoUsuario>();
             //MySqlConnection conexion = new MySqlConnection(connectionString);
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            using (MySqlConnection conexion = new MySqlConnection("server=btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com;database=btysdysnqpqagrxxw0d2;user id=uwdx5b9h4efazhm1;password=kyq7GytPr1yRDt06Gmh7;port=3306"))
             {
                 try
                 {
