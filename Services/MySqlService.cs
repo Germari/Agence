@@ -14,26 +14,20 @@ namespace Agence_Practical_Test.Services
         private readonly string connectionString;
         public MySqlService(IConfiguration config)
         {
-            MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
-            conn_string.Server = "btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com";
-            conn_string.Database = "btysdysnqpqagrxxw0d2";
-            conn_string.UserID = "uwdx5b9h4efazhm1";
-            conn_string.Password = "kyq7GytPr1yRDt06Gmh7";
-            conn_string.Port = 3306;
-            connectionString = conn_string.ToString();// "Server=btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com;Port=3306;Database=btysdysnqpqagrxxw0d2;Uid=uwdx5b9h4efazhm1;Pwd=kyq7GytPr1yRDt06Gmh7;SslMode=Preferred;";//config.GetValue<string>("ConnectionStrings:DefaultConnection");
+            connectionString = config.GetValue<string>("ConnectionStrings:DefaultConnection");
         }
         public async Task<List<CaoUsuario>> GetConsultores()
         {
             List<CaoUsuario> response = new List<CaoUsuario>();
             //MySqlConnection conexion = new MySqlConnection(connectionString);
-            using (MySqlConnection conexion = new MySqlConnection("server=btysdysnqpqagrxxw0d2-mysql.services.clever-cloud.com;database=btysdysnqpqagrxxw0d2;user id=uwdx5b9h4efazhm1;password=kyq7GytPr1yRDt06Gmh7;port=3306"))
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 try
                 {
                     conexion.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_usuario cu inner join caol.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2)";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2)";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -61,7 +55,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_usuario cu inner join caol.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and co_usuario = ?coUsuario";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and co_usuario = ?coUsuario";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -111,7 +105,7 @@ namespace Agence_Practical_Test.Services
                     conexion.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_cliente";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_cliente";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -140,7 +134,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_usuario cu inner join caol.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and no_usuario = ?noUsuario";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and no_usuario = ?noUsuario";
                     cmd.Parameters.Add("?noUsuario", MySqlDbType.VarChar).Value = noUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -208,7 +202,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_salario cs where cs.co_usuario =  ?coUsuario";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_salario cs where cs.co_usuario =  ?coUsuario";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -237,7 +231,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from caol.cao_fatura cf inner join caol.cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario and (cf.data_emissao >= ?initD and cf.data_emissao <= ?finalD )group by cf.data_emissao ";
+                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_fatura cf inner join btysdysnqpqagrxxw0d2.cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario and (cf.data_emissao >= ?initD and cf.data_emissao <= ?finalD )group by cf.data_emissao ";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     cmd.Parameters.Add("?initD", MySqlDbType.DateTime).Value = initialD;
                     cmd.Parameters.Add("?finalD", MySqlDbType.DateTime).Value = finalD;
