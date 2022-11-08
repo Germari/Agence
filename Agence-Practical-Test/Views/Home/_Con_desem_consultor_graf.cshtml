@@ -1,9 +1,0 @@
-﻿
-@using Agence_Practical_Test.DTO;
-@model List<ConDesemConsultorRel>
-    @{
-        var a = ViewBag.CoUsuario;
-    }
-
-<img src="@Url.Action("Bar_Graf", "Home", new {coUsuario=Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CoUsuario),initDate=ViewBag.InitDate,finalDate=ViewBag.FinalDate })"  width="1200"
-     height="800"/>

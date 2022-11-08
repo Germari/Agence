@@ -1,0 +1,65 @@
+﻿@*@using Agence_Practical_Test.Models;
+    @model List<ConDesemConsultorRel>
+
+    @{
+        List<string> xvalues = new List<string>();
+        List<float> yvalues = new List<float>();
+        var mycharty = new System.Windows.(width: 600, height: 400, theme: "<chart backcolor=\"#756a6a\" backgradientstyle=\"topbottom\" bordercolor=\"64, 64, 64,255\" borderwidth=\"10\" borderlinedashstyle=\"solid\" palette=\"earthtones\" antialiasing=\"all\">\r\n   \r\n  <chartareas>\r\n    <chartarea name=\"default\" _template_=\"all\" backcolor=\"transparent\" backsecondarycolor=\"white\" bordercolor=\"64, 64, 64, 64\" borderdashstyle=\"solid\" shadowcolor=\"transparent\">\r\n            <area3dstyle lightstyle=\"realistic\" enable3d=\"true\" inclination=\"30\" isclustered=\"false\" isrightangleaxes=\"true\" perspective=\"40\" rotation=\"35\" wallwidth=\"1\" />\r\n        </chartarea>\r\n    </chartareas>\r\n    <legends>\r\n        <legend _template_=\"all\" backcolor=\"transparent\" font=\"trebuchet ms, 8.25pt, style=bold\" istextautofit=\"true\" /> \r\n    </legends>\r\n    </chart>");
+
+        if (model.count > 0)
+        {
+            mycharty.addseries(name: model[0].name, charttype: "pie", xvalue: model.select<condesemconsultorrel, string>(x => $" {x.name} - {x.saldo.receitaliquida * 100 / model.sum(m => m.saldo.receitaliquida)} %").tolist(), yvalues: model.select<condesemconsultorrel, float>(x => x.saldo.receitaliquida).tolist());
+        }
+        mycharty.addlegend();
+        mycharty.addtitle($"participacao na receita");
+        mycharty.write();
+    }*@
+<!--<canvas id="grafica" width="400" height="400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>-->
+@*<script src="/js/Chart.js"></script>*@
+<!--<script>// Obtener una referencia al elemento canvas del DOM
+    const $grafica = document.querySelector("#grafica");
+    // Las etiquetas son las que van en el eje X. 
+    const etiquetas = ["Enero", "Febrero", "Marzo", "Abril"]
+    // Podemos tener varios conjuntos de datos. Comencemos con uno
+    const datosVentas2020 = {
+        label: "Ventas por mes",
+        data: [5000, 1500, 8000, 5102], // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+        borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+        borderWidth: 1,// Ancho del borde
+        order: 1
+    };
+    const datosVentas2021 = {
+        label: "Ventas por mes",
+        data: [5000, 1500, 8000, 5102], // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+        borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+        borderWidth: 1,// Ancho del borde
+        type: 'line',
+        order: 0
+    };
+    const data = {
+        labels: ['a', 'f'],
+    }
+    new Chart($grafica, {
+        type: 'bar',// Tipo de gráfica
+        data: {
+            labels: etiquetas,
+            datasets: [
+                datosVentas2020,
+                // Aquí más datos...
+                datosVentas2021
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+    });</script>-->
+

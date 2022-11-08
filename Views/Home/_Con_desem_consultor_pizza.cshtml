@@ -1,0 +1,67 @@
+﻿
+@using Agence_Practical_Test.Models;
+@model List<ConDesemConsultorRel>
+@{
+    var a = ViewBag.CoUsuario;
+}
+
+<canvas id="grafica1" width="400" height="400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
+
+<script>
+    var grafica = document.querySelector("#grafica1");
+    var etiquetas = [];
+    var datos = [];
+    var model = @Html.Raw(Json.Serialize(Model));
+    var dataGraph = [];
+
+    model.forEach(function (item) {
+        dataGraph.push(item.saldo.receitaLiquida);
+        etiquetas.push(item.name);
+    });
+    var colors = colorRGB(dataGraph.length);
+
+    var datos = {
+        label: "Receita Liquida",
+        data: dataGraph,
+        borderColor: colors,
+        borderWidth: 1,
+        backgroundColor: colors,
+        type: 'pie',
+        order: 0
+    };
+
+    new Chart(grafica, {
+        type: 'pie',
+
+        data: {
+            labels: etiquetas,
+            datasets: [
+                datos,
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+    });
+
+    function generarNumero(numero) {
+        return (Math.random() * numero).toFixed(0);
+    }
+
+    function colorRGB(numero) {
+
+        var response = [];
+        for (var i = 0; i < numero; i++) {
+            response.push("rgb" + "(" + generarNumero(255) + "," + generarNumero(255) + "," + generarNumero(255) + ")");
+        }
+        return response;
+    }
+</script>

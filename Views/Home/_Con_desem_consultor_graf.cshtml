@@ -1,0 +1,120 @@
+﻿
+@using Agence_Practical_Test.Models;
+@model List<ConDesemConsultorRel>
+@{
+    var a = ViewBag.CoUsuario;
+}
+
+<canvas id="grafica1" width="400" height="400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
+
+<script>
+    var grafica = document.querySelector("#grafica1");
+    var etiquetas = [];
+    var datos = [];
+    var lineDatos = [];
+    var model = @Html.Raw(Json.Serialize(Model));
+    var dataSets = [];
+
+    model.forEach(function (item) {
+        item.values.forEach(function (subitem) {
+
+            if (!etiquetas.includes(subitem.periodo)) {
+                
+                etiquetas.push(subitem.periodo);
+            }
+        });
+       
+    });
+
+    model.forEach(function (item) {
+        var tempdata = [];
+
+        etiquetas.forEach(function (e) {
+            var hasValue = false;
+
+            item.values.forEach(function (subitem) {
+                if (e == subitem.periodo) {
+                    tempdata.push(subitem.receitaLiquida);
+                    hasValue = true;
+                }
+            });
+
+            if (!hasValue) {
+                tempdata.push(0);
+            }
+        });
+        dataSets.push(
+            {
+                label: item.name,
+                data: tempdata,
+                borderColor: colorRGB(),
+                borderWidth: 1,
+                backgroundColor: colorRGB(),
+                type: 'bar',
+                order: 0
+
+            });
+       
+    });
+
+    for (var i = 0; i < etiquetas.length; i++) {
+        var tempDatosLine = 0;
+        var counter = 0;
+        var promedio = 0;
+        for (var j = 0; j < model.length; j++) {
+            for (var k = 0; k < model[j].values.length; k++) {
+                if (etiquetas[i] == model[j].values[k].periodo) {
+                    counter++;
+                    tempDatosLine += model[j].values[k].custoFixo;
+                    break;
+                }
+            }
+            
+        }
+        if (counter > 0) {
+            promedio = tempDatosLine / counter;
+        }
+        lineDatos.push(promedio);
+    }
+    dataSets.push({
+        label: "custo fixo promedio",
+        data: lineDatos,
+        borderColor: colorRGB(),
+        borderWidth: 1,
+        backgroundColor: colorRGB(),
+        type: 'line',
+        order: 1
+
+    });
+                   
+
+    new Chart(grafica, {
+        type: 'bar',
+
+        data: {
+            labels: etiquetas,
+            datasets: dataSets
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+    });
+
+    function generarNumero(numero) {
+        return (Math.random() * numero).toFixed(0);
+    }
+
+    function colorRGB() {
+
+        return "rgb" + "(" + generarNumero(255) + "," + generarNumero(255) + "," + generarNumero(255) + ")";
+
+    }
+</script>

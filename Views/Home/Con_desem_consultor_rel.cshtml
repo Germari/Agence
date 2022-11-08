@@ -1,0 +1,76 @@
+﻿
+@using Agence_Practical_Test.Models;
+@model ConDesemConsultorRel
+<div>
+    <table cellspacing=1 cellpadding=3 width="100%" bgcolor=#cccccc id="pesquisaAvancada">
+        <tbody>
+            <tr bgcolor=#efefef>
+                <td colspan=5><span class="style3">@Model.Name</span> </td>
+            </tr>
+            @if (Model.Values.Count != 0)
+            {
+        <tr bgcolor=#fafafa>
+            <td nowrap>
+                <div align="center"><strong>Per&iacute;odo</strong></div>
+            </td>
+            <td>
+                <div align="center"><strong>Receita L&iacute;quida </strong></div>
+            </td>
+            <td>
+                <div align="center"><strong>Custo Fixo </strong></div>
+            </td>
+            <td>
+                <div align="center"><strong>Comiss&atilde;o</strong></div>
+            </td>
+            <td>
+                <div align="center"><strong>Lucro</strong></div>
+            </td>
+        </tr>
+            }
+            @foreach (var item in Model.Values)
+            {
+                <tr bgcolor=#fafafa>
+                    <td nowrap>@item.Periodo</td>
+                    <td>
+                        <div align="right">R$ @item.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                    </td>
+                    <td>
+                        <div align="right"> R$ @item.CustoFixo.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                    </td>
+                    <td>
+                        <div align="right"> R$ @item.Comissao.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                    </td>
+                    <td>
+                        <div align="right">R$ @item.Lucro.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                    </td>
+                </tr>
+            }
+
+            <tr bgcolor=#efefef>
+                <td nowrap bgcolor="#efefef"><strong>SALDO</strong></td>
+               
+                <td>
+                    <div align="right">
+                        <font color="#000000">R$ @Model.Saldo.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                    </div>
+                </td>
+                <td>
+                    <div align="right">
+                        <font color="#000000">R$  @Model.Saldo.CustoFixo.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                    </div>
+                </td>
+                <td>
+                    <div align="right">
+                        <font color="#000000"> R$ @Model.Saldo.Comissao.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                    </div>
+                </td>
+                <td>
+                    <div align="right">
+                        <font color="#0000FF">R$  @Model.Saldo.Lucro.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+</div>
