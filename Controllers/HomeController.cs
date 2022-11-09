@@ -71,7 +71,7 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario, string initDate, string finalDate)
         {
-            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d"); 
             var request = new RestRequest(Method.Post.ToString());
             var body = JsonConvert.SerializeObject(new { Method = "_Con_desempenho" });
             request.AddParameter("application/json", body, ParameterType.RequestBody);
