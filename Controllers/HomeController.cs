@@ -72,7 +72,11 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario, string initDate, string finalDate)
         {
-           
+            var client2 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request2 = new RestRequest(Method.Post.ToString());
+            var body2 = JsonConvert.SerializeObject(new { month = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower()) });
+            request2.AddParameter("application/json", body2, ParameterType.RequestBody);
+            RestResponse response2 = client2.Execute(request2);
 
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
@@ -99,11 +103,7 @@ namespace Agence_Practical_Test.Controllers
             {
                 result.Add(_service.GetConDesemConsultorRel(item, initialD, finalD).Result);
             }
-            var client2 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-            var request2 = new RestRequest(Method.Post.ToString());
-            var body2 = JsonConvert.SerializeObject(new { result=result });
-            request2.AddParameter("application/json", body2, ParameterType.RequestBody);
-            RestResponse response2 = client2.Execute(request2);
+            
 
             return PartialView(result);
         }
