@@ -77,7 +77,7 @@ namespace Agence_Practical_Test.Services
         }
         public async Task<ConDesemConsultorRel> GetConDesemConsultorRel(string noUsuario, DateTime initialD, DateTime finalD)
         {
-            var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request = new RestRequest(Method.Post.ToString());
             var body = JsonConvert.SerializeObject(new { Method = "GetConDesemConsultorRel in mysqlservice" });
             request.AddParameter("application/json", body, ParameterType.RequestBody);
@@ -85,7 +85,7 @@ namespace Agence_Practical_Test.Services
 
             var consultor = GetConsultorByNo(noUsuario);
 
-            var client1 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
             var body1 = JsonConvert.SerializeObject(new { consultor });
             request1.AddParameter("application/json", body, ParameterType.RequestBody);
@@ -161,7 +161,7 @@ namespace Agence_Practical_Test.Services
                 }
                 catch (Exception ex)
                 {
-                    var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+                    var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
                     var request = new RestRequest(Method.Post.ToString());
                     var body = JsonConvert.SerializeObject(new { ex});
                     request.AddParameter("application/json", body, ParameterType.RequestBody);
@@ -171,7 +171,7 @@ namespace Agence_Practical_Test.Services
                 }
                 conexion.Dispose();
             }
-            var client1 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
             var body1 = JsonConvert.SerializeObject(new { response });
             request1.AddParameter("application/json", body1, ParameterType.RequestBody);
