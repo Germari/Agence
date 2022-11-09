@@ -74,7 +74,7 @@ namespace Agence_Practical_Test.Controllers
         {
             var client2 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request2 = new RestRequest(Method.Post.ToString());
-            var body2 = JsonConvert.SerializeObject(new { month = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower()+"."), list = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList() });
+            var body2 = JsonConvert.SerializeObject(new { month = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower()+"."), list = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList(), parsed= DateTime.TryParse($"1/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".")}/{initDate.Split(" / ")[1]}", out _) });
             request2.AddParameter("application/json", body2, ParameterType.RequestBody);
             RestResponse response2 = client2.Execute(request2);
 
