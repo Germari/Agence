@@ -143,6 +143,7 @@
     <PackageReference Include="MySql.Data" Version="8.0.31" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties c_5_4users_4titos_4_1nuget_4packages_4bootstrap_45_12_12_4contentfiles_4any_4any_4wwwroot_4css_4bootstrap_1rtl_1min_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>

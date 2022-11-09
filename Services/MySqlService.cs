@@ -89,7 +89,7 @@ namespace Agence_Practical_Test.Services
             var request1 = new RestRequest(Method.Post.ToString());
             var body1 = JsonConvert.SerializeObject(new { consultor });
             request1.AddParameter("application/json", body, ParameterType.RequestBody);
-            RestResponse resp1 = client.Execute(request1);
+            RestResponse resp1 = client1.Execute(request1);
 
             if (consultor == default)
                 return default;
