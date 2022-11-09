@@ -33,23 +33,14 @@ namespace Agence_Practical_Test.Controllers
 
         public ActionResult Con_desempenho()
         {
-            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-            var request = new RestRequest(Method.Post.ToString());
-            var body =JsonConvert.SerializeObject(new {Method="Con_desempenho" });
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
-            RestResponse response = client.Execute(request);
-
+          
             var consultores = _service.GetConsultores().Result;
             ViewBag.Message = "Desempenho";
             return View(consultores);
         }
         public ActionResult Con_desempenho_aba_cliente()
         {
-            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-            var request = new RestRequest(Method.Post.ToString());
-            var body = JsonConvert.SerializeObject(new { Method = "Con_desempenho_aba_cliente" });
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
-            RestResponse response = client.Execute(request);
+           
 
             var clientes = _service.GetClientes().Result;
             ViewBag.Message = "Desempenho";
@@ -72,36 +63,14 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario, string initDate, string finalDate)
         {
-            try
-            {
-
-
-                var client2 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-                var request2 = new RestRequest(Method.Post.ToString());
-                var body2 = JsonConvert.SerializeObject(new { 
-                    month = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") - 1,
-                    list = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList(),
-                    parsed = DateTime.TryParse($"{initDate.Split("/")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") - 1}/1", out _) });
-                request2.AddParameter("application/json", body2, ParameterType.RequestBody);
-                RestResponse response2 = client2.Execute(request2);
-
+               
                 DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"{initDate.Split("/")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".")-1}/1", out initialD);
-            parsed = DateTime.TryParse($"{initDate.Split("/")[0]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[1].ToLower() + ".")-1}/1", out finalD);
+            var parsed = DateTime.TryParse(GetFormatedDate(initDate), out initialD);
+            parsed = DateTime.TryParse(GetFormatedDate(finalDate), out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
-            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-            var request = new RestRequest(Method.Post.ToString());
-            var body = JsonConvert.SerializeObject(new { initialD,finalD });
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
-            RestResponse response = client.Execute(request);
-
-            var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-            var request1 = new RestRequest(Method.Post.ToString());
-            var body1 = JsonConvert.SerializeObject(new System.Globalization.CultureInfo("pt-BR").NumberFormat ) ;
-            request1.AddParameter("application/json", body1, ParameterType.RequestBody);
-            RestResponse response1 = client1.Execute(request1);
+            
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
             if (coUsuario == default)
                 return PartialView(result);
@@ -113,25 +82,21 @@ namespace Agence_Practical_Test.Controllers
             
 
             return PartialView(result);
-            }
-            catch (Exception ex)
-            {
-                var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
-                var request1 = new RestRequest(Method.Post.ToString());
-                var body1 = JsonConvert.SerializeObject(ex);
-                request1.AddParameter("application/json", body1, ParameterType.RequestBody);
-                RestResponse response1 = client1.Execute(request1);
-
-                throw ex;
-            }
+            
         }
+
+        private string GetFormatedDate(string initDate)
+        {
+            return $"{initDate.Split("/")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") + 1}/1";
+        }
+
         [HttpPost]
         public ActionResult _Con_desem_consultor_graf(List<string> coUsuario, string initDate, string finalDate)
         {
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out initialD);
-            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out finalD);
+            var parsed = DateTime.TryParse(GetFormatedDate(initDate), out initialD);
+            parsed = DateTime.TryParse(GetFormatedDate(finalDate), out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
@@ -155,8 +120,8 @@ namespace Agence_Practical_Test.Controllers
 
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out initialD);
-            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out finalD);
+            var parsed = DateTime.TryParse(GetFormatedDate(initDate), out initialD);
+            parsed = DateTime.TryParse(GetFormatedDate(finalDate), out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
             if (coUsuarioList == default)

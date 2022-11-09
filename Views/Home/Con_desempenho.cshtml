@@ -11,7 +11,7 @@
 }
 
 <script>
-    function llamarVistaParcial(tbox, monthfrom, yearfrom, monthto, yearto) {
+    function llamarVistaParcial(tbox, monthfrom, yearfrom, yearto, monthto) {
         var names = [];
         for (var i = 0; i < tbox.options.length; i++) {
             names.push(tbox.options[i].text);
@@ -30,7 +30,7 @@
     });
     }
 
-    function llamarVistaParcialGraf(tbox, monthfrom, yearfrom, monthto, yearto) {
+    function llamarVistaParcialGraf(tbox, monthfrom, yearfrom, yearto, monthto) {
         var $ = jQuery;
         var names = [];
         for (var i = 0; i < tbox.options.length; i++) {
@@ -50,7 +50,7 @@
     });
     }
 
-    function llamarVistaParcialGrafPizza(tbox, monthfrom, yearfrom, monthto, yearto) {
+    function llamarVistaParcialGrafPizza(tbox, monthfrom, yearfrom, yearto, monthto) {
         var $ = jQuery;
         
         var names = [];
