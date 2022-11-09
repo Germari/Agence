@@ -189,9 +189,9 @@ namespace Agence_Practical_Test.Services
 
             var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
-            var body1 = JsonConvert.SerializeObject(new { connectionString,initialD,finalD});
-            request.AddParameter("application/json", body1, ParameterType.RequestBody);
-            RestResponse respons1 = client.Execute(request1);
+            var body1 = JsonConvert.SerializeObject(new { coUsuario,initialD,finalD});
+            request1.AddParameter("application/json", body1, ParameterType.RequestBody);
+            RestResponse respons1 = client1.Execute(request1);
 
             List<ConDesemConsultorValue> response = new List<ConDesemConsultorValue>();
             List<CaoFatura> values = GetFacturesByCoUsuario(coUsuario, initialD, finalD);
@@ -201,14 +201,14 @@ namespace Agence_Practical_Test.Services
             var clientv = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var requestv = new RestRequest(Method.Post.ToString());
             var bodyv = JsonConvert.SerializeObject(values);
-            request.AddParameter("application/json", bodyv, ParameterType.RequestBody);
-            RestResponse responsv = client.Execute(requestv);
+            requestv.AddParameter("application/json", bodyv, ParameterType.RequestBody);
+            RestResponse responsv = clientv.Execute(requestv);
 
             var clientvv = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var requestvv = new RestRequest(Method.Post.ToString());
             var bodyvv = "lo anterior fue values";
-            request.AddParameter("application/json", bodyvv, ParameterType.RequestBody);
-            RestResponse responsvv = client.Execute(requestvv);
+            requestvv.AddParameter("application/json", bodyvv, ParameterType.RequestBody);
+            RestResponse responsvv = clientvv.Execute(requestvv);
 
             values.GroupBy(v => v.DataEmissao.Month);
             foreach (var item in values.GroupBy(v => v.DataEmissao.Year))
