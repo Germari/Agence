@@ -76,8 +76,8 @@ namespace Agence_Practical_Test.Controllers
 
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt-BR"), System.Globalization.DateTimeStyles.None, out initialD);
-            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt-BR"), System.Globalization.DateTimeStyles.AssumeLocal, out finalD);
+            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("pt-BR"), System.Globalization.DateTimeStyles.None, out initialD);
+            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("pt-BR"), System.Globalization.DateTimeStyles.AssumeLocal, out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
             var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
@@ -88,7 +88,7 @@ namespace Agence_Practical_Test.Controllers
 
             var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
-            var body1 = JsonConvert.SerializeObject(new System.Globalization.CultureInfo("pt-BR").NumberFormat ) ;
+            var body1 = JsonConvert.SerializeObject(new System.Globalization.CultureInfo("pt-BR").DateTimeFormat ) ;
             request1.AddParameter("application/json", body1, ParameterType.RequestBody);
             RestResponse response1 = client1.Execute(request1);
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
