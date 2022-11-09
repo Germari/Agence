@@ -32,16 +32,16 @@
                 <tr bgcolor=#fafafa>
                     <td nowrap>@item.Periodo</td>
                     <td>
-                        <div align="right">R$ @item.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                        <div align="right">R$ @item.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</div>
                     </td>
                     <td>
-                        <div align="right"> R$ @item.CustoFixo.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                        <div align="right"> R$ @item.CustoFixo.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</div>
                     </td>
                     <td>
-                        <div align="right"> R$ @item.Comissao.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                        <div align="right"> R$ @item.Comissao.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</div>
                     </td>
                     <td>
-                        <div align="right">R$ @item.Lucro.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</div>
+                        <div align="right">R$ @item.Lucro.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</div>
                     </td>
                 </tr>
             }
@@ -51,22 +51,22 @@
                
                 <td>
                     <div align="right">
-                        <font color="#000000">R$ @Model.Saldo.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                        <font color="#000000">R$ @Model.Saldo.ReceitaLiquida.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</font>
                     </div>
                 </td>
                 <td>
                     <div align="right">
-                        <font color="#000000">R$  @Model.Saldo.CustoFixo.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                        <font color="#000000">R$  @Model.Saldo.CustoFixo.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</font>
                     </div>
                 </td>
                 <td>
                     <div align="right">
-                        <font color="#000000"> R$ @Model.Saldo.Comissao.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                        <font color="#000000"> R$ @Model.Saldo.Comissao.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</font>
                     </div>
                 </td>
                 <td>
                     <div align="right">
-                        <font color="#0000FF">R$  @Model.Saldo.Lucro.ToString("N", new System.Globalization.CultureInfo("Pt-BR"))</font>
+                        <font color="#0000FF">R$  @Model.Saldo.Lucro.ToString("N", new System.Globalization.CultureInfo("pt-BR").NumberFormat)</font>
                     </div>
                 </td>
             </tr>
