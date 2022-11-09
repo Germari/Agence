@@ -4,6 +4,7 @@ using Agence_Practical_Test.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,6 +32,11 @@ namespace Agence_Practical_Test.Controllers
 
         public ActionResult Con_desempenho()
         {
+            var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request = new RestRequest(Method.Post.ToString());
+            var body =JsonConvert.SerializeObject(new {Method="Con_desempenho" });
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse response = client.Execute(request);
 
             var consultores = _service.GetConsultores().Result;
             ViewBag.Message = "Desempenho";
@@ -38,6 +44,11 @@ namespace Agence_Practical_Test.Controllers
         }
         public ActionResult Con_desempenho_aba_cliente()
         {
+            var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request = new RestRequest(Method.Post.ToString());
+            var body = JsonConvert.SerializeObject(new { Method = "Con_desempenho_aba_cliente" });
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse response = client.Execute(request);
 
             var clientes = _service.GetClientes().Result;
             ViewBag.Message = "Desempenho";
@@ -60,6 +71,18 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario, string initDate, string finalDate)
         {
+            var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request = new RestRequest(Method.Post.ToString());
+            var body = JsonConvert.SerializeObject(new { Method = "_Con_desempenho" });
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse response = client.Execute(request);
+
+            var client1 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request1 = new RestRequest(Method.Post.ToString());
+            var body1 = JsonConvert.SerializeObject(new { coUsuario ,initDate,finalDate});
+            request1.AddParameter("application/json", body1, ParameterType.RequestBody);
+            RestResponse response1 = client1.Execute(request);
+
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
             var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out initialD);
@@ -74,6 +97,12 @@ namespace Agence_Practical_Test.Controllers
             {
                 result.Add(_service.GetConDesemConsultorRel(item, initialD, finalD).Result);
             }
+            var client2 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request2 = new RestRequest(Method.Post.ToString());
+            var body2 = JsonConvert.SerializeObject(new { result=result });
+            request2.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse response2 = client2.Execute(request2);
+
             return PartialView(result);
         }
         [HttpPost]

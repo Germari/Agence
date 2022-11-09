@@ -2,6 +2,8 @@
 using Agence_Practical_Test.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,7 @@ namespace Agence_Practical_Test.Services
                     conexion.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2)";
+                    cmd.CommandText = @"select * from cao_usuario cu inner join permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2)";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -55,7 +57,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and co_usuario = ?coUsuario";
+                    cmd.CommandText = @"select * from cao_usuario cu inner join permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and co_usuario = ?coUsuario";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -75,7 +77,20 @@ namespace Agence_Practical_Test.Services
         }
         public async Task<ConDesemConsultorRel> GetConDesemConsultorRel(string noUsuario, DateTime initialD, DateTime finalD)
         {
+            var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request = new RestRequest(Method.Post.ToString());
+            var body = JsonConvert.SerializeObject(new { Method = "GetConDesemConsultorRel in mysqlservice" });
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse resp = client.Execute(request);
+
             var consultor = GetConsultorByNo(noUsuario);
+
+            var client1 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request1 = new RestRequest(Method.Post.ToString());
+            var body1 = JsonConvert.SerializeObject(new { consultor });
+            request1.AddParameter("application/json", body, ParameterType.RequestBody);
+            RestResponse resp1 = client.Execute(request1);
+
             if (consultor == default)
                 return default;
             var coUsuario = consultor.CoUsuario;
@@ -105,7 +120,7 @@ namespace Agence_Practical_Test.Services
                     conexion.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_cliente";
+                    cmd.CommandText = @"select * from cao_cliente";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -134,7 +149,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_usuario cu inner join btysdysnqpqagrxxw0d2.permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and no_usuario = ?noUsuario";
+                    cmd.CommandText = @"select * from cao_usuario cu inner join permissao_sistema p  on cu.co_usuario =p.co_usuario where p.co_sistema =1 and p.in_ativo ='S' and (p.co_tipo_usuario =0 or p.co_tipo_usuario =1 or p.co_tipo_usuario =2) and no_usuario = ?noUsuario";
                     cmd.Parameters.Add("?noUsuario", MySqlDbType.VarChar).Value = noUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -146,10 +161,21 @@ namespace Agence_Practical_Test.Services
                 }
                 catch (Exception ex)
                 {
+                    var client = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+                    var request = new RestRequest(Method.Post.ToString());
+                    var body = JsonConvert.SerializeObject(new { ex});
+                    request.AddParameter("application/json", body, ParameterType.RequestBody);
+                    RestResponse resp = client.Execute(request);
+
                     response = default;
                 }
                 conexion.Dispose();
             }
+            var client1 = new RestClient("https://webhook.site/#!/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
+            var request1 = new RestRequest(Method.Post.ToString());
+            var body1 = JsonConvert.SerializeObject(new { response });
+            request1.AddParameter("application/json", body1, ParameterType.RequestBody);
+            RestResponse resp1 = client1.Execute(request1);
             return response;
         }
 
@@ -202,7 +228,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_salario cs where cs.co_usuario =  ?coUsuario";
+                    cmd.CommandText = @"select * from cao_salario cs where cs.co_usuario =  ?coUsuario";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -231,7 +257,7 @@ namespace Agence_Practical_Test.Services
                 {
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = @"select * from btysdysnqpqagrxxw0d2.cao_fatura cf inner join btysdysnqpqagrxxw0d2.cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario and (cf.data_emissao >= ?initD and cf.data_emissao <= ?finalD )group by cf.data_emissao ";
+                    cmd.CommandText = @"select * from cao_fatura cf inner join cao_sistema  cs  on cf.co_sistema=cs.co_sistema  where cs.co_usuario =  ?coUsuario and (cf.data_emissao >= ?initD and cf.data_emissao <= ?finalD )group by cf.data_emissao ";
                     cmd.Parameters.Add("?coUsuario", MySqlDbType.VarChar).Value = coUsuario;
                     cmd.Parameters.Add("?initD", MySqlDbType.DateTime).Value = initialD;
                     cmd.Parameters.Add("?finalD", MySqlDbType.DateTime).Value = finalD;
