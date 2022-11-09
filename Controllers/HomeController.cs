@@ -81,14 +81,14 @@ namespace Agence_Practical_Test.Controllers
                 var body2 = JsonConvert.SerializeObject(new { 
                     month = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") - 1,
                     list = new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList(),
-                    parsed = DateTime.TryParse($"{initDate.Split(" / ")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") - 1}/1", out _) });
+                    parsed = DateTime.TryParse($"{initDate.Split("/")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".") - 1}/1", out _) });
                 request2.AddParameter("application/json", body2, ParameterType.RequestBody);
                 RestResponse response2 = client2.Execute(request2);
 
                 DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"{initDate.Split(" / ")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".")-1}/1", out initialD);
-            parsed = DateTime.TryParse($"{initDate.Split(" / ")[0]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[1].ToLower() + ".")-1}/1", out finalD);
+            var parsed = DateTime.TryParse($"{initDate.Split("/")[1]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0].ToLower() + ".")-1}/1", out initialD);
+            parsed = DateTime.TryParse($"{initDate.Split("/")[0]}/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[1].ToLower() + ".")-1}/1", out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
             var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
