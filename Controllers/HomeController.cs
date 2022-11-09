@@ -71,24 +71,25 @@ namespace Agence_Practical_Test.Controllers
         [HttpPost]
         public ActionResult _Con_desempenho(List<string> coUsuario, string initDate, string finalDate)
         {
-            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d"); 
+           
+
+            DateTime initialD = DateTime.MinValue;
+            DateTime finalD = DateTime.MaxValue;
+            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt-br"), System.Globalization.DateTimeStyles.None, out initialD);
+            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt-br"), System.Globalization.DateTimeStyles.None, out finalD);
+            finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
+
+            var client = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request = new RestRequest(Method.Post.ToString());
-            var body = JsonConvert.SerializeObject(new { Method = "_Con_desempenho" });
+            var body = JsonConvert.SerializeObject(new { initialD,finalD });
             request.AddParameter("application/json", body, ParameterType.RequestBody);
             RestResponse response = client.Execute(request);
 
             var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
-            var body1 = JsonConvert.SerializeObject(new { coUsuario ,initDate,finalDate});
+            var body1 = JsonConvert.SerializeObject(new { parsed });
             request1.AddParameter("application/json", body1, ParameterType.RequestBody);
             RestResponse response1 = client1.Execute(request1);
-
-            DateTime initialD = DateTime.MinValue;
-            DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"1/{initDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out initialD);
-            parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("Pt"), System.Globalization.DateTimeStyles.None, out finalD);
-            finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
-
             List<ConDesemConsultorRel> result = new List<ConDesemConsultorRel>();
             if (coUsuario == default)
                 return PartialView(result);
