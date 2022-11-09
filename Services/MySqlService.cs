@@ -88,7 +88,7 @@ namespace Agence_Practical_Test.Services
             var client1 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request1 = new RestRequest(Method.Post.ToString());
             var body1 = JsonConvert.SerializeObject(new { consultor });
-            request1.AddParameter("application/json", body, ParameterType.RequestBody);
+            request1.AddParameter("application/json", body1, ParameterType.RequestBody);
             RestResponse resp1 = client1.Execute(request1);
 
             if (consultor == default)

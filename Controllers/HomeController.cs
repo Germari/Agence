@@ -81,7 +81,7 @@ namespace Agence_Practical_Test.Controllers
             var request1 = new RestRequest(Method.Post.ToString());
             var body1 = JsonConvert.SerializeObject(new { coUsuario ,initDate,finalDate});
             request1.AddParameter("application/json", body1, ParameterType.RequestBody);
-            RestResponse response1 = client1.Execute(request);
+            RestResponse response1 = client1.Execute(request1);
 
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
@@ -100,7 +100,7 @@ namespace Agence_Practical_Test.Controllers
             var client2 = new RestClient("https://webhook.site/4ac0dd1e-0b8f-42da-aaf9-d44aa828f06d");
             var request2 = new RestRequest(Method.Post.ToString());
             var body2 = JsonConvert.SerializeObject(new { result=result });
-            request2.AddParameter("application/json", body, ParameterType.RequestBody);
+            request2.AddParameter("application/json", body2, ParameterType.RequestBody);
             RestResponse response2 = client2.Execute(request2);
 
             return PartialView(result);
