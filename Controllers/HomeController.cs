@@ -76,7 +76,7 @@ namespace Agence_Practical_Test.Controllers
 
             DateTime initialD = DateTime.MinValue;
             DateTime finalD = DateTime.MaxValue;
-            var parsed = DateTime.TryParse($"1/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames[].IndexOf(initDate.Split("/")[0] + ".")}/{initDate.Split(" / ")[1]}", out initialD);
+            var parsed = DateTime.TryParse($"1/{new System.Globalization.CultureInfo("pt-BR").DateTimeFormat.AbbreviatedMonthNames.ToList().IndexOf(initDate.Split("/")[0] + ".")}/{initDate.Split(" / ")[1]}", out initialD);
             parsed = DateTime.TryParse($"1/{finalDate}", new System.Globalization.CultureInfo("pt-BR").DateTimeFormat, System.Globalization.DateTimeStyles.AssumeLocal, out finalD);
             finalD = finalD.AddDays(DateTime.DaysInMonth(finalD.Year, finalD.Month) - 1);
 
